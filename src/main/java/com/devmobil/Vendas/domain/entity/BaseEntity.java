@@ -9,11 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-@SuppressWarnings("serial")
 public class BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id  
-	@GeneratedValue(strategy = GenerationType.AUTO)  
+	@GeneratedValue(strategy = GenerationType.IDENTITY)  
 	@Column(name = "id")
 	protected long id;
 

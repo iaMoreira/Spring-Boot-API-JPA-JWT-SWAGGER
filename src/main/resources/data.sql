@@ -31,6 +31,7 @@
  INSERT INTO CLIENTE (ID, NOME, EMAIL, SENHA) VALUES (2, 'Roger', 'roger@geobras.com', '123');
  INSERT INTO CLIENTE (ID, NOME, EMAIL, SENHA) VALUES (3, 'Jandson', 'jandson@geobras.com', '123');
  
- 
+ INSERT INTO PRODUTO (ID, DESCRICAO, PRECO) VALUES (1, 'Samsung Galaxy S20', 4999.99);
+ INSERT INTO PRODUTO (ID, DESCRICAO, PRECO) VALUES (2, 'Xaomi Mi 10T', 1999.99);
  
  

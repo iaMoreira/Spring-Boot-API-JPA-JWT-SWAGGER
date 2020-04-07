@@ -9,16 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Produto {
+public class Produto extends BaseEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column(length = 100)
 	private String descricao;
 	
-	@Column(name = "total", precision = 20, scale= 2)
+	@Column(name = "preco", precision = 20, scale= 2)
 	private BigDecimal preco;
 	
 	public long getId() {
