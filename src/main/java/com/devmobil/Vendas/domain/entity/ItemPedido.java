@@ -12,7 +12,7 @@ public class ItemPedido {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "pedido_id")
@@ -22,7 +22,7 @@ public class ItemPedido {
 	@JoinColumn(name = "produto_id")
 	private Produto produto;
 	private Integer quantidade;
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 	public void setId(Integer id) {

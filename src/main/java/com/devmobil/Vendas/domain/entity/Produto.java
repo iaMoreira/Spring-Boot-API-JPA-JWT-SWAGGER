@@ -13,7 +13,7 @@ public class Produto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private long id;
 	
 	@Column(length = 100)
 	private String descricao;
@@ -21,10 +21,10 @@ public class Produto {
 	@Column(name = "total", precision = 20, scale= 2)
 	private BigDecimal preco;
 	
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getDescricao() {
