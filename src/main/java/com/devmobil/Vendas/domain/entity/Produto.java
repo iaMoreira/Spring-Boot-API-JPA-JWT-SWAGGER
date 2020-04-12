@@ -4,10 +4,13 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class Produto extends BaseEntity {
 
@@ -16,30 +19,18 @@ public class Produto extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 
+
 	@Column(length = 100)
+	private String nome;
+	
+	@Column(length = 250)
 	private String descricao;
 	
 	@Column(name = "preco", precision = 20, scale= 2)
 	private BigDecimal preco;
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	public BigDecimal getPreco() {
-		return preco;
-	}
-	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
-	}
+
+	
 	
 	
 }

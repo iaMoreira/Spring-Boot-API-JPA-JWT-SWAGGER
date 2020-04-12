@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devmobil.Vendas.domain.entity.Cliente;
-import com.devmobil.Vendas.domain.repository.ClienteRepository;
 
 @RestController
 @RequestMapping("/api/clientes")
-public class ClienteController extends BaseController<Cliente, ClienteRepository> {
+public class ClienteController extends BaseController<Cliente> {
 	
 	@GetMapping("/hello/{nome}")
 	@RequestMapping(value ="/hello/{nome}", method = RequestMethod.GET)

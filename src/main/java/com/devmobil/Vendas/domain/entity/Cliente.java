@@ -26,7 +26,7 @@ public class Cliente extends BaseEntity {
 	@Column(name = "senha", length = 100)
 	private String senha;
 	
-	
+    @JsonIgnore
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
 	private Set<Pedido> pedidos;
 	

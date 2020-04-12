@@ -2,6 +2,7 @@ package com.devmobil.Vendas.domain.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.devmobil.Vendas.domain.entity.Cliente;
 import com.devmobil.Vendas.domain.entity.ItemPedido;
 import com.devmobil.Vendas.domain.entity.Pedido;
 import com.devmobil.Vendas.domain.entity.Produto;
+import com.devmobil.Vendas.domain.enums.StatusPedido;
 import com.devmobil.Vendas.domain.repository.ClienteRepository;
 import com.devmobil.Vendas.domain.repository.ItemPedidoRepository;
 import com.devmobil.Vendas.domain.repository.PedidoRepository;
@@ -41,11 +43,12 @@ public class PedidoService implements IPedidoService{
 		long idClient = dto.getCliente();
 		Cliente cliente = clienteRepository
 			.findById(idClient)
-			.orElseThrow(() -> new RegraNegocioException("Código de cliente inválido."));
+			.orElseThrow(() -> new RegraNegocioException("Código de cliente = " + idClient+ " é inválido."));
 		
 		Pedido pedido = new Pedido();
 		pedido.setTotal(dto.getTotal());
 		pedido.setDataPedido(LocalDate.now());
+		pedido.setStatus(StatusPedido.REALIZADO);
 		pedido.setCliente(cliente);
 		
 		List<ItemPedido> itensPedido = this.converterItens(pedido, dto.getItems());
@@ -54,6 +57,10 @@ public class PedidoService implements IPedidoService{
 		itemPedidoRepository.saveAll(itensPedido);
 		pedido.setItens(itensPedido);
 		return pedido;
+	}
+	
+	public Optional<Pedido> getPedido(long id) {
+		return repository.findByIdFetchItens(id);
 	}
 	
 	private List<ItemPedido> converterItens(Pedido pedido, List<ItemPedidoDto> itens) {

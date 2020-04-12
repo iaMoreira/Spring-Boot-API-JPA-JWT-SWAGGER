@@ -1,8 +1,9 @@
 package com.devmobil.Vendas.domain.controller;
 
 import java.lang.reflect.ParameterizedType;
-import java.net.URI;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -19,14 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.devmobil.Vendas.domain.entity.BaseEntity;
 import com.devmobil.Vendas.domain.repository.BaseRepository;
 
 
-public class BaseController<E extends BaseEntity, R> {
+public class BaseController<E extends BaseEntity> {
 	
 	@Autowired
 	protected BaseRepository<E> repository;
@@ -47,22 +47,20 @@ public class BaseController<E extends BaseEntity, R> {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<E> store(@RequestBody E entity, UriComponentsBuilder uriComponentsBuilder ) {
-		E newEntity = repository.save(entity); 
-		
-		URI uri = uriComponentsBuilder.path("/").buildAndExpand().toUri();
-		return ResponseEntity.created(uri).body(newEntity);
+	public ResponseEntity<E> store(@Valid @RequestBody E entity) {
+		E newEntity = repository.save(entity); 		
+		return ResponseEntity.status(HttpStatus.CREATED).body(newEntity);
 	}
 
 	@PutMapping(value = "{id}")
-	public ResponseEntity<E> update(@PathVariable(value = "id") long id, @RequestBody E entity) {
+	public ResponseEntity<E> update(@Valid @PathVariable(value = "id") long id, @RequestBody E entity) {
 		Optional<E> optional = repository.findById(id);
 		if(optional.isPresent()) {
 			entity.setId(id);
 			E newEntity = repository.save(entity); 
 			return ResponseEntity.ok(newEntity);
 		}
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, getGenericName()+" não encontrado(a)!");
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, getGenericName()+".id = "+ id +" não encontrado(a)!");
 	}
 
 	@GetMapping(value = "{id}")
@@ -71,7 +69,7 @@ public class BaseController<E extends BaseEntity, R> {
 		if(entity.isPresent()) {
 			return ResponseEntity.ok(entity.get());
 		}
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, getGenericName()+" não encontrado(a)!");
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, getGenericName()+".id = "+ id +" não encontrado(a)!");
 	}
 
 	@DeleteMapping(value = "{id}")
@@ -82,7 +80,7 @@ public class BaseController<E extends BaseEntity, R> {
 			repository.deleteById(id);	
 			return ResponseEntity.noContent().build();
 		}
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, getGenericName()+" não encontrado(a)!");
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, getGenericName()+".id = "+ id +" não encontrado(a)!");
 	}
 	
 	@SuppressWarnings("unchecked")
