@@ -47,13 +47,13 @@ public class BaseController<E extends BaseEntity> {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<E> store(@Valid @RequestBody E entity) {
+	public ResponseEntity<E> store(@RequestBody @Valid E entity) {
 		E newEntity = repository.save(entity); 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(newEntity);
 	}
 
 	@PutMapping(value = "{id}")
-	public ResponseEntity<E> update(@Valid @PathVariable(value = "id") long id, @RequestBody E entity) {
+	public ResponseEntity<E> update(@PathVariable(value = "id") long id, @RequestBody @Valid E entity) {
 		Optional<E> optional = repository.findById(id);
 		if(optional.isPresent()) {
 			entity.setId(id);

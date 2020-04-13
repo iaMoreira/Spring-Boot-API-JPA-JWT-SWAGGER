@@ -1,4 +1,4 @@
-package com.devmobil.Vendas.domain.controller;
+package com.devmobil.Vendas.domain.dto;
 
 import java.util.Arrays;
 import java.util.List;

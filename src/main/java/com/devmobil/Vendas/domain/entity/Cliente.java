@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,14 +19,17 @@ public class Cliente extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "nome", length = 100)
+	@NotEmpty(message = "O campo nome é obrigátorio.")
 	private String nome;
 	
 	@Column(name = "email", length = 100, unique = true)
+	@Email(message = "Insira o email válido.")
     private String email;
 	
     @JsonIgnore // funciona como um hidden e esconde o campo quando é rederizado em Json 
 	@Column(name = "senha", length = 100)
-	private String senha;
+    @NotEmpty(message = "O campo senha é obrigátorio.")
+    private String senha;
 	
     @JsonIgnore
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
