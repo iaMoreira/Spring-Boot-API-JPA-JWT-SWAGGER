@@ -3,6 +3,10 @@ package com.devmobil.Vendas.domain.dto;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import com.devmobil.Vendas.validation.NotEmptyList;
+
 /*
  * {
 	"cliente": 1,
@@ -17,9 +21,13 @@ import java.util.List;
  * */
 public class PedidoDto {
 
-	private long cliente;
+	@NotNull(message = "Informe  o código do cliente.")
+	private Long cliente;
+	@NotNull(message = "Campo total do pedido é obrigatório.")
 	private BigDecimal total;
+	@NotEmptyList(message = "Pedido não pode ser realizado sem itens.")
 	private List<ItemPedidoDto> items;
+	
 	public long getCliente() {
 		return cliente;
 	}
