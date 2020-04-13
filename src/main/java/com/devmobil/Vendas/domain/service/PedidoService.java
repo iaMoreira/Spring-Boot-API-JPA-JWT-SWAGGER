@@ -20,6 +20,7 @@ import com.devmobil.Vendas.domain.repository.ClienteRepository;
 import com.devmobil.Vendas.domain.repository.ItemPedidoRepository;
 import com.devmobil.Vendas.domain.repository.PedidoRepository;
 import com.devmobil.Vendas.domain.repository.ProdutoRepository;
+import com.devmobil.Vendas.exception.PedidoNaoEncontradoException;
 import com.devmobil.Vendas.exception.RegraNegocioException;
 
 @Service
@@ -84,6 +85,18 @@ public class PedidoService implements IPedidoService{
 					
 					return itemPedido;
 					}).collect(Collectors.toList());
+		
+	}
+
+	@Override
+	@Transactional
+	public void atualizaStatus(Long id, StatusPedido statusPedido) {
+		repository
+			.findById(id)
+			.map( pedido -> {
+				pedido.setStatus(statusPedido);
+				return repository.save(pedido);
+			}).orElseThrow( () -> new PedidoNaoEncontradoException());
 		
 	}
 	
