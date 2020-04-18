@@ -60,7 +60,7 @@ public class PedidoService implements IPedidoService{
 		return pedido;
 	}
 	
-	public Optional<Pedido> getPedido(long id) {
+	public Optional<Pedido> getPedido(Long id) {
 		return repository.findByIdFetchItens(id);
 	}
 	
@@ -73,7 +73,7 @@ public class PedidoService implements IPedidoService{
 		return itens
 				.stream()
 				.map(dto -> {
-					long idProduto = dto.getProduto();
+					Long idProduto = dto.getProduto();
 					Produto produto	= produtoRepository
 							.findById(idProduto)
 							.orElseThrow( () ->  new RegraNegocioException("Código de proudo inválido: " + idProduto));

@@ -10,6 +10,6 @@ import com.devmobil.Vendas.domain.enums.StatusPedido;
 public interface IPedidoService {
 	
 	Pedido salvar(PedidoDto dto);
-	Optional<Pedido> getPedido(long id);
+	Optional<Pedido> getPedido(Long id);
 	void atualizaStatus(Long id, StatusPedido statusPedido);
 }
