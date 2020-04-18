@@ -8,10 +8,12 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
@@ -19,8 +21,8 @@ import lombok.Setter;
 public class User extends BaseEntity{
 
 	@Column
-	@NotNull(message = "Email é obrigátio.")
-	private String email;
+	@NotNull(message = "Username é obrigátio.")
+	private String username;
 		
 	@Column 
 	@NotNull(message = "Senha é obrigátio.")

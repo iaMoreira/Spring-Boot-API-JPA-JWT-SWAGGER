@@ -16,8 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "cliente")
 public class Cliente extends BaseEntity {
 	
-	private static final long serialVersionUID = 1L;
-
 	@Column(name = "nome", length = 100)
 	@NotEmpty(message = "O campo nome é obrigátorio.")
 	private String nome;

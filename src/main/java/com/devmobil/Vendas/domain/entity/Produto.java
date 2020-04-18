@@ -15,12 +15,6 @@ import lombok.Setter;
 @Entity
 public class Produto extends BaseEntity {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-
 	@Column(length = 100)
 	@NotEmpty(message = "O campo nome é obrigátorio.")
 	private String nome;

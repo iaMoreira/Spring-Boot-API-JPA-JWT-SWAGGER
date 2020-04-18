@@ -7,11 +7,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class ItemPedido extends BaseEntity {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@ManyToOne
 	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;

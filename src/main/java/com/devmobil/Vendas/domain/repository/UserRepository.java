@@ -6,5 +6,5 @@ import com.devmobil.Vendas.domain.entity.User;
 
 public interface UserRepository extends BaseRepository<User>{
 
-	public Optional<User> findByEmail(String email);
+	public Optional<User> findByUsername(String username);
 }

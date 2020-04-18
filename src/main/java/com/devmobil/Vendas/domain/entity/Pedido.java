@@ -17,11 +17,6 @@ import com.devmobil.Vendas.domain.enums.StatusPedido;
 @Entity
 public class Pedido extends BaseEntity {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
