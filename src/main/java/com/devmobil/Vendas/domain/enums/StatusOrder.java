@@ -1,6 +1,6 @@
 package com.devmobil.Vendas.domain.enums;
 
-public enum StatusPedido {
+public enum StatusOrder {
 
     REALIZADO,
     CANCELADO;

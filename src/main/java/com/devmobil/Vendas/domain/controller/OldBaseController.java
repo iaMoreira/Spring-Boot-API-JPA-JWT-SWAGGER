@@ -22,16 +22,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.devmobil.Vendas.domain.entity.BaseEntity;
-import com.devmobil.Vendas.domain.repository.BaseRepository;
+import com.devmobil.Vendas.resource.BaseRepository;
+import com.devmobil.Vendas.resource.BaseEntity;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 
-public class BaseController<E extends BaseEntity> {
+public class OldBaseController<E extends BaseEntity> {
 	
 	@Autowired
 	protected BaseRepository<E> repository;
 	
 	@GetMapping
+	@ApiOperation("Listar todos itens")
+	@ApiResponses({@ApiResponse(code = 200, message = "Itens encontrados")})
 	public Page<E> index(@PageableDefault Pageable pageable, E filter){
 		 ExampleMatcher matcher = ExampleMatcher
                  .matching()
@@ -46,6 +53,7 @@ public class BaseController<E extends BaseEntity> {
 	}
 	
 	@PostMapping
+	@ApiOperation("Salvar item")
 	@Transactional
 	public ResponseEntity<E> store(@RequestBody @Valid E entity) {
 		E newEntity = repository.save(entity); 		
@@ -53,7 +61,8 @@ public class BaseController<E extends BaseEntity> {
 	}
 
 	@PutMapping(value = "{id}")
-	public ResponseEntity<E> update(@PathVariable(value = "id") long id, @RequestBody @Valid E entity) {
+	@ApiOperation("Atualizar item")
+	public ResponseEntity<E> update(@PathVariable(value = "id") @ApiParam("Id do item") Long id, @RequestBody @Valid E entity) {
 		Optional<E> optional = repository.findById(id);
 		if(optional.isPresent()) {
 			entity.setId(id);
@@ -64,7 +73,8 @@ public class BaseController<E extends BaseEntity> {
 	}
 
 	@GetMapping(value = "{id}")
-	public ResponseEntity<E> show(@PathVariable(value = "id") long id) {
+	@ApiOperation("Detalhar item")
+	public ResponseEntity<E> show(@PathVariable(value = "id") @ApiParam("Id do item") Long id) {
 		Optional<E> entity = repository.findById(id);
 		if(entity.isPresent()) {
 			return ResponseEntity.ok(entity.get());
@@ -74,7 +84,8 @@ public class BaseController<E extends BaseEntity> {
 
 	@DeleteMapping(value = "{id}")
 	@Transactional
-	public ResponseEntity<?> delete(@PathVariable(value = "id") long id) {
+	@ApiOperation("Deletar item")
+	public ResponseEntity<?> delete(@PathVariable(value = "id") @ApiParam("Id do item") Long id) {
 		Optional<E> optional = repository.findById(id);
 		if(optional.isPresent()) {
 			repository.deleteById(id);	

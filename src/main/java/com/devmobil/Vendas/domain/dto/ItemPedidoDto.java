@@ -1,21 +1,13 @@
 package com.devmobil.Vendas.domain.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ItemPedidoDto {
 
-	private long produto;
-	private Integer quantidade;
-	public long getProduto() {
-		return produto;
-	}
-	public void setProduto(long produto) {
-		this.produto = produto;
-	}
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}
-	
+	private Long product;
+	private Integer amount;	
 	
 }

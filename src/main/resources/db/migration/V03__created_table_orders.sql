@@ -1,0 +1,8 @@
+ CREATE TABLE  orders (
+ 	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	user_id BIGINT(20) REFERENCES users (id),
+	status VARCHAR(20),
+	total NUMERIC(20,2),
+	deleted_at TIMESTAMP NULL,
+ 	created_at TIMESTAMP NULL DEFAULT NOW()
+ );
