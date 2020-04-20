@@ -25,13 +25,13 @@ public class User extends BaseEntity{
 	@Column(name = "name", length = 100)
 	private String name;
 	
-	@Column(name = "username", length = 100)
-	private String username;
+	@Column(name = "email", length = 100)
+	private String email;
 		
 	@JsonIgnore // funciona como um hidden e esconde o campo quando é rederizado em Json 
 	@Column(name = "password", length = 100)
 	private String password;
-	
+		
 	@Column
 	private Boolean admin;
 	

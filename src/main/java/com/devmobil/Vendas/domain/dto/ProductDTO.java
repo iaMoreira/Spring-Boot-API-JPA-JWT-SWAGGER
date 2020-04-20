@@ -1,6 +1,7 @@
 package com.devmobil.Vendas.domain.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -26,14 +27,12 @@ public class ProductDTO implements BaseDTO<Product> {
 	
 	@Override
 	public Product getEntity() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Product getEntity(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Product product = new Product();
+		product.setName(name);
+		product.setPrice(price);
+		product.setDescription(description);
+		product.setCreatedAt(LocalDateTime.now());
+		return product;
 	}
 
 }

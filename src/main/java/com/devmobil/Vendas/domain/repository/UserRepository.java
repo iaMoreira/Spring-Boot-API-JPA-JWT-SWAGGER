@@ -7,5 +7,5 @@ import com.devmobil.Vendas.resource.BaseRepository;
 
 public interface UserRepository extends BaseRepository<User>{
 
-	public Optional<User> findByUsername(String username);
+	public Optional<User> findByEmail(String email);
 }

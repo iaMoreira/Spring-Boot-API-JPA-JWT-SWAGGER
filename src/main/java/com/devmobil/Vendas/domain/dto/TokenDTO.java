@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TokenDTO {
 
-	private String username;
+	private Long id;
+	private String email;
+	private String name;
 	private String access_token;
 }

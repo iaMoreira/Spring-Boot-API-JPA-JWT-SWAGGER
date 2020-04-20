@@ -3,6 +3,8 @@ package com.devmobil.Vendas.domain.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -16,8 +18,8 @@ public class UserDTO implements BaseDTO<User>{
 	@NotEmpty(message = "O campo nome é obrigátorio.")
 	private String name;
 	
-	@NotNull(message = "Username é obrigátio.")
-	private String username;
+	@NotNull(message = "Email é obrigátio.")
+	private String email;
 	
 	
     @NotNull(message = "O campo senha é obrigátorio.")
@@ -27,13 +29,11 @@ public class UserDTO implements BaseDTO<User>{
     
 	@Override
 	public User getEntity() {
-		
-		return null;
+		User user = new User();
+		user.setAdmin(admin);
+		user.setCreatedAt(LocalDateTime.now());
+		user.setEmail(email);
+		user.setName(name);
+		return user;
 	}
-	@Override
-	public User getEntity(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

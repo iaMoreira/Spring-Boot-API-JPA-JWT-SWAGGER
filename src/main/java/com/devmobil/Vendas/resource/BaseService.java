@@ -45,7 +45,8 @@ public class BaseService<E extends BaseEntity, D extends BaseDTO<E>> {
 	public E update(Long id, D dto) {
 		Optional<E> optional = repository.findById(id);
 		if(optional.isPresent()) {
-			E entity = dto.getEntity(id);
+			E entity = dto.getEntity();
+			entity.setId(id);
 			E newEntity = repository.save(entity);
 			return newEntity;
 		}

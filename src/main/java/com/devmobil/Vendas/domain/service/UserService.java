@@ -32,14 +32,14 @@ public class UserService  extends BaseService<User, UserDTO> implements UserDeta
 		User user = new User();
 		user.setAdmin(dto.getAdmin());
 		user.setName(dto.getName());
-		user.setUsername(dto.getUsername());
+		user.setEmail(dto.getEmail());
 		user.setPassword(encoder.encode(dto.getPassword()));
 		user.setCreatedAt(LocalDateTime.now());
 		return repository.save(user);
 	}  
 	
 	public UserDetails auth (User user) {
-		UserDetails userAuth =  loadUserByUsername(user.getUsername());
+		UserDetails userAuth =  loadUserByUsername(user.getEmail());
 		boolean matches = encoder.matches(user.getPassword(), userAuth.getPassword());
 		if(matches) {
 			return userAuth;
@@ -48,14 +48,14 @@ public class UserService  extends BaseService<User, UserDTO> implements UserDeta
 	}
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = repository.findByUsername(username)
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		User user = repository.findByEmail(email)
 					.orElseThrow( () -> new UsernameNotFoundException("Usuário não encontrado."));
 		
 		String[] roles = user.getAdmin() ? new String[] {"ADMIN", "USER"} : new String[] {"USER"};
 		
 		return org.springframework.security.core.userdetails.User.builder()
-				.username(user.getUsername())
+				.username(user.getEmail())
 				.password(user.getPassword())
 				.roles(roles)
 				.build();

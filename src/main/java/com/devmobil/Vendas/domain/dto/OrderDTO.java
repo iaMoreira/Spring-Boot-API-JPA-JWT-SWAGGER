@@ -30,14 +30,5 @@ public class OrderDTO implements BaseDTO<Order> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public Order getEntity(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
-	
 	
 }

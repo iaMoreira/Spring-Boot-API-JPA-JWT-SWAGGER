@@ -31,7 +31,7 @@ public class JwtService {
 		
 		return Jwts
 				.builder()
-				.setSubject(user.getUsername())
+				.setSubject(user.getEmail())
 				.setExpiration(date)
 				.signWith(SignatureAlgorithm.HS512, this.signatureKey)
 				.compact();
