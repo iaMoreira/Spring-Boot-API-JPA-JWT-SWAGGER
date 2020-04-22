@@ -61,7 +61,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 //				.permitAll()
 				.antMatchers("/api/orders/**")
 					.hasRole("USER")
-				.antMatchers(HttpMethod.POST, "/api/users/login", "/api/users")
+				.antMatchers(HttpMethod.POST, "/api/users/login",
+						"/api/users", "/api/forgot-password", "/api/reset-password")
 					.permitAll()
 					
 			.and()

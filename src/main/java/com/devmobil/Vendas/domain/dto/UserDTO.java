@@ -30,7 +30,7 @@ public class UserDTO implements BaseDTO<User>{
 	@Override
 	public User getEntity() {
 		User user = new User();
-		user.setAdmin(admin);
+		user.setAdmin(admin ? admin : false);
 		user.setCreatedAt(LocalDateTime.now());
 		user.setEmail(email);
 		user.setName(name);

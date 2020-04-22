@@ -64,4 +64,6 @@ public class UserController  extends BaseController<User, UserDTO, UserService>{
     		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Senha atual não confere!");
     	}
 	}
+
+	
 }
