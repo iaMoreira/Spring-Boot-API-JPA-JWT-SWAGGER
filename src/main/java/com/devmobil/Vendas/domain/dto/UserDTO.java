@@ -34,6 +34,7 @@ public class UserDTO implements BaseDTO<User>{
 		user.setCreatedAt(LocalDateTime.now());
 		user.setEmail(email);
 		user.setName(name);
+		user.setPassword(password);
 		return user;
 	}
 }
